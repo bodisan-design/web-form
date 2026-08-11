@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Saya</title>
+  <style>
+    /* Reset & Base Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden; /* Menghilangkan scrollbar ganda pada browser utama */
+    }
+
+    /* Loading Spinner Styling */
+    .loading-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      z-index: 10;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #e2e8f0;
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loading-text {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* iFrame Styling */
+    .iframe-wrapper {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animasi Loading saat Aplikasi Pertama Kali Dimuat -->
+  <div class="loading-container" id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Memuat aplikasi...</div>
+  </div>
+
+  <!-- Container iFrame Fullscreen -->
+  <div class="iframe-wrapper">
+    <iframe 
+      id="gasApp"
+      src="https://script.google.com/macros/s/AKfycbxf98Vuv9CUbDvH45kO0wn8jVdQntsbAhAD_kjQMS4Y3PbYzchUm7LVGvJBUTJhPj7n/exec" 
+      allow="geolocation; microphone; camera; clipboard-write;"
+      onload="hideLoading()">
+    </iframe>
+  </div>
+
+  <script>
+    // Fungsi untuk menyembunyikan animasi loading setelah iFrame selesai memuat
+    function hideLoading() {
+      const loader = document.getElementById('loading');
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 400);
+      }
+    }
+  </script>
+</body>
+</html>
